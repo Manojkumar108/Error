@@ -1,4 +1,4 @@
-import { configDotenv } from 'dotenv';
+
 import express from 'express';
 import router from './router/auth-router.js';
 import { connectDb } from './utils/db.js';
