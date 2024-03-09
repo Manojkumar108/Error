@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcryptjs'
 const userSchema = new mongoose.Schema({
     name :{
         type:String,
@@ -42,6 +43,21 @@ const userSchema = new mongoose.Schema({
 
 //jwt
 
+userSchema.pre("save",async function(){
+    console.log("Pre Method",this);
+    const user =this;
+    if(!user.isModified('password')){
+        next();
+    }
+    try {
+        const saltRound = await bcrypt.genSalt(10);
+        const hash_password =  bcrypt.hash(user.password,saltRound);
+        user.password=hash_password;
+
+    } catch (error) {
+        next(error);
+    }
+})
 
 // define the model or the collection name
 // collection name should be starts with capital name

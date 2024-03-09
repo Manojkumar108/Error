@@ -1,5 +1,6 @@
 import { User } from "../models/user-model.js";
 
+
 const home = async(req,res) =>{
     try {
         
@@ -25,6 +26,10 @@ const register = async(req,res)=>{
     if(userExist){
         return res.json({message:"Email already exists"});
     }
+    //hashing password using bcrypt
+
+
+
     else{
         userCreated= await User.create({name,email,phone,address,password})
     }
