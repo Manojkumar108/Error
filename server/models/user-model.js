@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 const userSchema = new mongoose.Schema({
     name :{
         type:String,
@@ -43,7 +44,8 @@ const userSchema = new mongoose.Schema({
 
 //jwt
 
-userSchema.pre("save",async function(){
+
+userSchema.pre("save",async function(next){
     console.log("Pre Method",this);
     const user =this;
     if(!user.isModified('password')){
@@ -51,13 +53,35 @@ userSchema.pre("save",async function(){
     }
     try {
         const saltRound = await bcrypt.genSalt(10);
-        const hash_password =  bcrypt.hash(user.password,saltRound);
+        const hash_password = await bcrypt.hash(user.password,saltRound);
         user.password=hash_password;
+        next();
 
     } catch (error) {
         next(error);
     }
 })
+
+//passward verification
+userSchema.methods.comparepassword = async function (password) {
+    return bcrypt.compare(password,this.password);
+    
+}
+
+userSchema.methods.generateToken = async function (){
+    try {
+
+        return jwt.sign({
+            userId:this._id.toString(),
+            email:this.email,
+            isAdmin:this.isAdmin,
+        },"kkkkkk")
+    } catch (error) {
+        console.error(error);
+        
+    }
+
+};
 
 // define the model or the collection name
 // collection name should be starts with capital name

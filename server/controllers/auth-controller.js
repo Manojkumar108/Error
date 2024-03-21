@@ -1,4 +1,5 @@
 import { User } from "../models/user-model.js";
+// import bcrypt from 'bcryptjs'
 
 
 const home = async(req,res) =>{
@@ -7,7 +8,7 @@ const home = async(req,res) =>{
         res.json({
             name:"Auth-router using extra route",
             app: "controller",
-            satus:"succes"
+            satus:"succes",
     
         })
     } catch (error) {
@@ -22,7 +23,7 @@ const register = async(req,res)=>{
         console.log(req.body)
     const {name,email,phone,address,password} =req.body;
     const userExist=await User.findOne({email:email})
-    let userCreated
+    
     if(userExist){
         return res.json({message:"Email already exists"});
     }
@@ -30,15 +31,48 @@ const register = async(req,res)=>{
 
 
 
-    else{
-        userCreated= await User.create({name,email,phone,address,password})
-    }
-    res.json({
-        message:userCreated
+   
+       const userCreated= await User.create({name,email,phone,address,password})
+    
+    res.status(201).json({
+        message:userCreated,token:await userCreated.generateToken(),userId:userCreated._id.toString(),
     })
     } catch (error) {
         res.status(400).json({message:"internal server error"})
     }
     
 }
-export {home,register};
+
+const login = async (req,res) =>{
+    try {
+        const {email,password}=req.body;
+
+        const userExist = await User.findOne({email})
+        if(!userExist){
+            return res.status(400).json({
+                massage:"invalid data"
+            })
+        }
+        const user = await userExist.comparepassword(password);
+
+        if (user) {
+            res.status(200).json({
+                msg:"login Successful",
+                token:await userExist.generateToken(),
+                userId:userExist._id.toString(),
+                
+            })
+        }
+        else{
+            res.json({
+                msg:"invalid password"
+            })
+        }
+
+    } catch (error) {
+        res.json({
+            message:"error"
+        })
+    }
+}
+export {home,register,login};

@@ -13,5 +13,6 @@ const router = express.Router();
 
 router.route("/").get(authcontoller.home)
 
-router.route("/register").get(authcontoller.register).post(authcontoller.register)
+router.route("/register").get(authcontoller.register).post(authcontoller.register);
+router.route("/login").post(authcontoller.login);
 export default router;
