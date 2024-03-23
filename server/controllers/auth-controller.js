@@ -70,9 +70,7 @@ const login = async (req,res) =>{
         }
 
     } catch (error) {
-        res.json({
-            message:"error"
-        })
+       next(error)
     }
 }
 export {home,register,login};
