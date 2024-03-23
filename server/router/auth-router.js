@@ -1,6 +1,9 @@
 import express from'express';
 import * as authcontoller from '../controllers/auth-controller.js'; //when are using ECMA6 we have to write the extantinon after path
+import { signupSchema } from '../validators/auth-validator.js';
+import validate from '../middleware/auth-middleware.js';
 const router = express.Router();
+
 
 
 // router.get("/",(req,res)=>{
@@ -13,6 +16,6 @@ const router = express.Router();
 
 router.route("/").get(authcontoller.home)
 
-router.route("/register").get(authcontoller.register).post(authcontoller.register);
+router.route("/register").get(authcontoller.register).post(validate(signupSchema) ,authcontoller.register);
 router.route("/login").post(authcontoller.login);
 export default router;
