@@ -1,34 +1,28 @@
-import z from "zod";
+import { z } from "zod";
 
-// creating an object Schema
-
+// Define Zod schema for the model
 const signupSchema = z.object({
-  name: z
-    .string({ required_error: "Name is required" })
+  name: z.string()
     .trim()
-    .min(3, { message: "name muast be atleast 3 character" })
-    .max(255, { message: "name should not be more than 255 character" }),
-  email: z
-    .string({ required_error: "email is required" })
+    .min(3, { message: "Name must be at least 3 characters" })
+    .max(255, { message: "Name should not be more than 255 characters" }),
+  email: z.string()
     .trim()
-    .email({message:"invalid email address"})
-    .min(3, { message: "email must be at least 3 characters" })
-    .max(255, { message: "email should not be more than 255 character" }),
-  phone: z
-    .string({ required_error: "phone  is required" })
+    .email({ message: "Invalid email address" })
+    .min(3, { message: "Email must be at least 3 characters" })
+    .max(255, { message: "Email should not be more than 255 characters" }),
+  phone: z.string()
     .trim()
-    .min(10, { message: "phone must be at least 10 characters" })
-    .max(10, { message: "phone should not be more than 10 character" }),
-    address: z.object({
-        state: z.string(),
-        city: z.string(),
-        pin: z.string(),
-      }),
-  password: z
-    .string({ required_error: "password is required" })
+    .min(10, { message: "Phone must be at least 10 characters" }),
+  address: z.object({
+    state: z.string(),
+    city: z.string(),
+    pin: z.string(),
+  }),
+  password: z.string()
     .trim()
-    .min(7, { message: "password must be at least of 6 characters" })
-    .max(1024, { message: "password can't be greater than 1024 characters" }),
+    .min(7, { message: "Password must be at least 7 characters" })
+    .max(1024, { message: "Password can't be greater than 1024 characters" }),
 });
 
-export {signupSchema};
+export { signupSchema };
