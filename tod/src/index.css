@@ -1,0 +1,163 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color-scheme: light dark;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Use a modern font */
+    min-height: 100vh;
+    background-color: #f9f9f9; /* Light background */
+}
+
+:root {
+    --primary-color: #646cff; /* Change primary color */
+    --secondary-color: #ff5f5f; /* Secondary color */
+    --bg-color: #f4f3ff;
+    --dark-color: #242424;
+    --helper-color: #99b9ff;
+}
+
+h1 {
+    font-size: 3.6rem; /* Slightly smaller heading */
+    line-height: 1.2;
+    font-weight: bold;
+    color: var(--dark-color); /* Darker color */
+}
+
+p,
+li,
+label,
+input,
+textarea {
+    font-size: 1.6rem; /* Smaller text size */
+    line-height: 1.6;
+    letter-spacing: 0.05rem;
+    color: #333; /* Dark text color */
+}
+
+a {
+    font-weight: 500;
+    font-size: 1.6rem;
+    letter-spacing: 0.05rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease; /* Smooth transition */
+}
+
+a:hover {
+    color: var(--secondary-color); /* Change color on hover */
+}
+
+.container {
+    max-width: 120rem; /* Slightly narrower container */
+    padding: 4rem 2rem;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    gap: 3rem; /* Smaller gap between grid items */
+}
+
+.grid-two-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Responsive grid */
+}
+
+/* Reusable button */
+button {
+    background-color: var(--primary-color) !important;
+    border-radius: 0.5rem; /* Slightly rounded corners */
+    padding: 1rem 2rem !important;
+    color: #fff;
+    font-size: 1.6rem !important;
+    border: none;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+
+button:hover {
+    background-color: var(--secondary-color) !important; /* Change background on hover */
+}
+
+.secondary-btn {
+    margin-left: 1.6rem !important; /* Smaller margin */
+}
+
+/* chakra ui button */
+.custom-button{
+    background-color: var(--primary-color) !important;
+    border-radius: 0.5rem; /* Slightly rounded corners */
+    padding: 1rem 2rem !important;
+    color: #fff;
+    font-size: 1.6rem !important;
+    border: none;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+}
+.custom-button:hover{background-color: var(--secondary-color) !important;}
+
+/* Hero section */
+.section-hero .grid {
+    align-items: center;
+}
+
+.hero-content p {
+    margin-bottom: 2rem; /* Smaller bottom margin */
+}
+
+.hero-image {
+    justify-items: center;
+}
+
+/* Error page */
+#error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fff; /* White background */
+}
+
+.content {
+    text-align: center;
+}
+
+.content h2.header {
+    font-size: 12vw; /* Larger header font size */
+    line-height: 1em;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Gradient background */
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: animate 10s ease-in-out infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+@keyframes animate {
+    0% {
+        background-position: 0 0;
+    }
+    25% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 100%;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+
+

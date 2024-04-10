@@ -1,0 +1,40 @@
+/* Navbar CSS */
+.container_nav {
+    max-width: 100%;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1); /* Add bottom shadow */
+}
+
+ul {
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 1.6rem;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+ul li a:hover {
+    background-color: #f4f4f4;
+}
+
+/* Optional: Add styles for active link */
+ul li a.active {
+    background-color: #646cff;
+    color: #ffffff;
+}
