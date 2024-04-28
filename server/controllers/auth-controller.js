@@ -53,13 +53,18 @@ const login = async (req,res) =>{
                 massage:"invalid data"
             })
         }
+        //compareing the password
         const user = await userExist.comparepassword(password);
+        const userName= userExist.name;
 
         if (user) {
             res.status(200).json({
                 msg:"login Successful",
                 token:await userExist.generateToken(),
                 userId:userExist._id.toString(),
+                userName,
+                
+                
                 
             })
         }
@@ -73,4 +78,31 @@ const login = async (req,res) =>{
        next(error)
     }
 }
-export {home,register,login};
+
+//get all registers users details
+const getUsers = async(req,res)=>{
+    try {
+        const user = await User.find().lean();
+        res.json({user})
+    } catch (error) {
+        console.error("error while finding users",error);
+        res.sendStatus(500)
+    }
+}
+
+//get user details
+const user = async(req,res)=>{
+    try {
+        const userData = await req.user;
+        console.log(userData);
+        res.status(200).json(userData)
+        
+    } catch (error) {
+        console.log(`error whil geting user detail ${error}`);
+    }
+}
+
+
+//verify the user email with nodemailer
+
+export {home,register,login,getUsers,user};
